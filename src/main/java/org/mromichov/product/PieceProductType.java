@@ -17,7 +17,7 @@ public class PieceProductType extends ProductType {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PieceProductType that = (PieceProductType) o;
-        return weight == that.weight;
+        return weight == that.weight && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override

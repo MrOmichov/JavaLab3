@@ -14,6 +14,10 @@ public class PackagedWeightedProduct implements PackagedProduct {
         this.netWeight = netWeight;
     }
 
+    public ProductPackage getProductPackage() {
+        return productPackage;
+    }
+
     @Override
     public int getTotalWeight() {
         return netWeight + productPackage.getWeight();
