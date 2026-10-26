@@ -1,23 +1,18 @@
 package org.mromichov.product.packaged;
 
 import org.mromichov.product.ProductPackage;
-import org.mromichov.product.PieceProductType;
+import org.mromichov.product.PieceProduct;
 
 import java.util.Objects;
 
-public class PackagedPieceProduct implements PackagedProduct {
-    private final PieceProductType pieceProduct;
+public class PackagedPieceProduct extends PieceProduct implements PackagedProduct {
     private final ProductPackage productPackage;
     private final int piecesNumber;
 
-    public PackagedPieceProduct(PieceProductType pieceProduct, int piecesNumber, ProductPackage productPackage) {
-        this.pieceProduct = pieceProduct;
+    public PackagedPieceProduct(PieceProduct pieceProduct, int piecesNumber, ProductPackage productPackage) {
+        super(pieceProduct.getName(), pieceProduct.getDescription(), pieceProduct.getWeight());
         this.productPackage = productPackage;
         this.piecesNumber = piecesNumber;
-    }
-
-    public PieceProductType getPieceProduct() {
-        return pieceProduct;
     }
 
     public ProductPackage getProductPackage() {
@@ -30,7 +25,7 @@ public class PackagedPieceProduct implements PackagedProduct {
 
     @Override
     public int getNetWeight() {
-        return piecesNumber * pieceProduct.getWeight();
+        return piecesNumber * getWeight();
     }
 
     @Override
@@ -42,11 +37,12 @@ public class PackagedPieceProduct implements PackagedProduct {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PackagedPieceProduct that = (PackagedPieceProduct) o;
-        return piecesNumber == that.piecesNumber && Objects.equals(pieceProduct, that.pieceProduct) && Objects.equals(productPackage, that.productPackage);
+        return piecesNumber == that.piecesNumber && Objects.equals(productPackage, that.productPackage) &&
+                Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pieceProduct, productPackage, piecesNumber);
+        return Objects.hash(getName(), getDescription(), productPackage, piecesNumber);
     }
 }

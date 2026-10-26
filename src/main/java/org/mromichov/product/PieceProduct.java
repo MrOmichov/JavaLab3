@@ -2,9 +2,9 @@ package org.mromichov.product;
 
 import java.util.Objects;
 
-public class PieceProductType extends ProductType {
+public class PieceProduct extends Product {
     private final int weight;
-    public PieceProductType(String name, String description, int weight) {
+    public PieceProduct(String name, String description, int weight) {
         super(name, description);
         this.weight = weight;
     }
@@ -16,7 +16,7 @@ public class PieceProductType extends ProductType {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        PieceProductType that = (PieceProductType) o;
+        PieceProduct that = (PieceProduct) o;
         return weight == that.weight && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
     }
 

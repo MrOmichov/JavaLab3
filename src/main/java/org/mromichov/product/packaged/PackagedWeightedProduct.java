@@ -1,15 +1,16 @@
 package org.mromichov.product.packaged;
 
 import org.mromichov.product.ProductPackage;
-import org.mromichov.product.WeightedProductType;
+import org.mromichov.product.WeightedProduct;
 
 import java.util.Objects;
 
-public class PackagedWeightedProduct implements PackagedProduct {
+public class PackagedWeightedProduct extends WeightedProduct implements PackagedProduct {
     private final ProductPackage productPackage;
     private final int netWeight;
 
-    public PackagedWeightedProduct(WeightedProductType weightedProduct, int netWeight, ProductPackage productPackage) {
+    public PackagedWeightedProduct(WeightedProduct weightedProduct, int netWeight, ProductPackage productPackage) {
+        super(weightedProduct.getName(), weightedProduct.getDescription());
         this.productPackage = productPackage;
         this.netWeight = netWeight;
     }
@@ -32,11 +33,12 @@ public class PackagedWeightedProduct implements PackagedProduct {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PackagedWeightedProduct that = (PackagedWeightedProduct) o;
-        return netWeight == that.netWeight;
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) &&
+                Objects.equals(productPackage, that.productPackage) && netWeight == that.netWeight;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(netWeight);
+        return Objects.hash(getName(), getDescription(), productPackage, netWeight);
     }
 }

@@ -9,7 +9,7 @@ public class ProductParty {
     private final String description;
     private final List<PackagedProduct> products;
 
-    public ProductParty(String name, String description, PackagedProduct... products) {
+    public ProductParty(String description, PackagedProduct... products) {
         this.description = description;
         this.products = List.of(products);
     }

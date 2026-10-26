@@ -1,15 +1,17 @@
 package org.mromichov.product.packaged;
 
+import org.mromichov.product.Product;
 import org.mromichov.product.ProductPackage;
 
 import java.util.List;
 import java.util.Objects;
 
-public class PackagedProductSet implements PackagedProduct {
+public class PackagedProductSet extends Product implements PackagedProduct {
     private final ProductPackage productPackage;
     private final List<PackagedProduct> innerProducts;
 
-    public PackagedProductSet(ProductPackage productPackage, PackagedProduct... innerProducts) {
+    public PackagedProductSet(String name, String description, ProductPackage productPackage, PackagedProduct... innerProducts) {
+        super(name, description);
         this.productPackage = productPackage;
         this.innerProducts = List.of(innerProducts);
     }
@@ -41,11 +43,12 @@ public class PackagedProductSet implements PackagedProduct {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PackagedProductSet that = (PackagedProductSet) o;
-        return Objects.equals(productPackage, that.productPackage) && Objects.equals(innerProducts, that.innerProducts);
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) &&
+                Objects.equals(productPackage, that.productPackage) && Objects.equals(innerProducts, that.innerProducts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(productPackage, innerProducts);
+        return Objects.hash(getName(), getDescription(), productPackage, innerProducts);
     }
 }
