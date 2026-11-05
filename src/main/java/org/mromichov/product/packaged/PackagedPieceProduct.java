@@ -5,14 +5,29 @@ import org.mromichov.product.PieceProduct;
 
 import java.util.Objects;
 
-public class PackagedPieceProduct extends PieceProduct implements PackagedProduct {
+public class PackagedPieceProduct implements PackagedProduct {
+    private final PieceProduct pieceProduct;
     private final ProductPackage productPackage;
     private final int piecesNumber;
 
     public PackagedPieceProduct(PieceProduct pieceProduct, int piecesNumber, ProductPackage productPackage) {
-        super(pieceProduct.getName(), pieceProduct.getDescription(), pieceProduct.getWeight());
-        this.productPackage = productPackage;
+        this.pieceProduct = Objects.requireNonNull(pieceProduct, "Piece product cannot be null!");
+        this.productPackage = Objects.requireNonNull(productPackage, "Product package cannot be null!");
         this.piecesNumber = piecesNumber;
+    }
+
+    public PieceProduct getPieceProduct() {
+        return pieceProduct;
+    }
+
+    @Override
+    public String getName() {
+        return pieceProduct.getName();
+    }
+
+    @Override
+    public String getDescription() {
+        return pieceProduct.getDescription();
     }
 
     public ProductPackage getProductPackage() {
@@ -25,7 +40,7 @@ public class PackagedPieceProduct extends PieceProduct implements PackagedProduc
 
     @Override
     public int getNetWeight() {
-        return piecesNumber * getWeight();
+        return piecesNumber * pieceProduct.getWeight();
     }
 
     @Override
@@ -37,12 +52,21 @@ public class PackagedPieceProduct extends PieceProduct implements PackagedProduc
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PackagedPieceProduct that = (PackagedPieceProduct) o;
-        return piecesNumber == that.piecesNumber && Objects.equals(productPackage, that.productPackage) &&
-                Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
+        return piecesNumber == that.piecesNumber && Objects.equals(pieceProduct, that.pieceProduct) &&
+                Objects.equals(productPackage, that.productPackage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription(), productPackage, piecesNumber);
+        return Objects.hash(pieceProduct, productPackage, piecesNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "PackagedPieceProduct{" +
+                "pieceProduct=" + pieceProduct +
+                ", productPackage=" + productPackage +
+                ", piecesNumber=" + piecesNumber +
+                '}';
     }
 }

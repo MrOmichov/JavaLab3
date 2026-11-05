@@ -5,14 +5,29 @@ import org.mromichov.product.WeightedProduct;
 
 import java.util.Objects;
 
-public class PackagedWeightedProduct extends WeightedProduct implements PackagedProduct {
+public class PackagedWeightedProduct implements PackagedProduct {
+    private final WeightedProduct weightedProduct;
     private final ProductPackage productPackage;
     private final int netWeight;
 
     public PackagedWeightedProduct(WeightedProduct weightedProduct, int netWeight, ProductPackage productPackage) {
-        super(weightedProduct.getName(), weightedProduct.getDescription());
-        this.productPackage = productPackage;
+        this.weightedProduct = Objects.requireNonNull(weightedProduct, "Weighted product cannot be null!");
+        this.productPackage = Objects.requireNonNull(productPackage, "Product package cannot be null!");
         this.netWeight = netWeight;
+    }
+
+    public WeightedProduct getWeightedProduct() {
+        return weightedProduct;
+    }
+
+    @Override
+    public String getName() {
+        return weightedProduct.getName();
+    }
+
+    @Override
+    public String getDescription() {
+        return weightedProduct.getDescription();
     }
 
     public ProductPackage getProductPackage() {
@@ -33,12 +48,21 @@ public class PackagedWeightedProduct extends WeightedProduct implements Packaged
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PackagedWeightedProduct that = (PackagedWeightedProduct) o;
-        return Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) &&
+        return Objects.equals(weightedProduct, that.weightedProduct) &&
                 Objects.equals(productPackage, that.productPackage) && netWeight == that.netWeight;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription(), productPackage, netWeight);
+        return Objects.hash(weightedProduct, productPackage, netWeight);
+    }
+
+    @Override
+    public String toString() {
+        return "PackagedWeightedProduct{" +
+                "weightedProduct=" + weightedProduct +
+                ", productPackage=" + productPackage +
+                ", netWeight=" + netWeight +
+                '}';
     }
 }
