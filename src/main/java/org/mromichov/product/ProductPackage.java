@@ -7,6 +7,7 @@ public final class ProductPackage {
     private final int weight;
 
     public ProductPackage(String name, int weight) {
+        Objects.requireNonNull(name, "Name cannot be null!");
         this.name = name;
         this.weight = weight;
     }
@@ -29,5 +30,13 @@ public final class ProductPackage {
     @Override
     public int hashCode() {
         return Objects.hash(name, weight);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductPackage{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                '}';
     }
 }

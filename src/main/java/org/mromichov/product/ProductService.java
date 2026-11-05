@@ -3,9 +3,13 @@ package org.mromichov.product;
 import org.mromichov.filter.Filter;
 import org.mromichov.product.packaged.PackagedProduct;
 import org.mromichov.product.packaged.PackagedProductSet;
+import org.mromichov.product.packaged.PackagedWeightedProduct;
+import java.util.Objects;
 
 public class ProductService {
     public static int countByFilter(ProductParty party, Filter filter) {
+        Objects.requireNonNull(party, "Party cannot be null!");
+        Objects.requireNonNull(filter, "Filter cannot be null!");
         return party.getProducts()
                 .stream()
                 .filter(product -> filter.apply(product.getName()))
@@ -14,6 +18,8 @@ public class ProductService {
     }
 
     public static int countByFilterDeep(ProductParty party, Filter filter) {
+        Objects.requireNonNull(party, "Party cannot be null!");
+        Objects.requireNonNull(filter, "Filter cannot be null!");
         return party.getProducts()
                 .stream()
                 .filter(product -> hasNameDeeply(product, filter))
@@ -38,6 +44,7 @@ public class ProductService {
     }
 
     public static boolean checkAllWeighted(ProductParty party) {
-        return party.getProducts().stream().allMatch(product -> product instanceof WeightedProduct);
+        Objects.requireNonNull(party, "Party cannot be null!");
+        return party.getProducts().stream().allMatch(product -> product instanceof PackagedWeightedProduct);
     }
 }

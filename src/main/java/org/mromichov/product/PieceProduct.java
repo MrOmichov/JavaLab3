@@ -24,4 +24,13 @@ public class PieceProduct extends Product {
     public int hashCode() {
         return Objects.hash(getName(), getDescription(), weight);
     }
+
+    @Override
+    public String toString() {
+        return "PieceProduct{" +
+                "name=" + getName() +
+                ", description=" + getDescription() +
+                ", weight=" + weight +
+                '}';
+    }
 }

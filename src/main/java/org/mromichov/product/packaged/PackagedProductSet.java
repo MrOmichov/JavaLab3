@@ -12,7 +12,8 @@ public class PackagedProductSet extends Product implements PackagedProduct {
 
     public PackagedProductSet(String name, String description, ProductPackage productPackage, PackagedProduct... innerProducts) {
         super(name, description);
-        this.productPackage = productPackage;
+        this.productPackage = Objects.requireNonNull(productPackage, "Product package cannot be null!");
+        Objects.requireNonNull(innerProducts, "Inner products cannot be null!");
         this.innerProducts = List.of(innerProducts);
     }
 
@@ -50,5 +51,15 @@ public class PackagedProductSet extends Product implements PackagedProduct {
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getDescription(), productPackage, innerProducts);
+    }
+
+    @Override
+    public String toString() {
+        return "PackagedProductSet{" +
+                "name=" + getName() +
+                ", description" + getDescription() +
+                ", productPackage=" + productPackage +
+                ", innerProducts=" + innerProducts +
+                '}';
     }
 }

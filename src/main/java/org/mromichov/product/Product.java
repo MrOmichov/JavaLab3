@@ -7,6 +7,7 @@ public abstract class Product {
     private final String description;
 
     public Product(String name, String description) {
+        requireNameAndDescription(name, description);
         this.name = name;
         this.description = description;
     }
@@ -17,6 +18,11 @@ public abstract class Product {
 
     public String getDescription() {
         return description;
+    }
+
+    private void requireNameAndDescription(String name, String description) {
+        Objects.requireNonNull(name, "Name cannot be null!");
+        Objects.requireNonNull(description, "Description cannot be null!");
     }
 
     @Override

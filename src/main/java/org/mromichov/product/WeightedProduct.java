@@ -5,4 +5,11 @@ public class WeightedProduct extends Product {
         super(name, description);
     }
 
+    @Override
+    public String toString() {
+        return "WeightedProduct{" +
+                "name=" + getName() +
+                ", description=" + getDescription() +
+                '}';
+    }
 }

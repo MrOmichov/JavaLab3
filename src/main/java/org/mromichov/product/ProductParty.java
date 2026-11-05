@@ -10,6 +10,8 @@ public class ProductParty {
     private final List<PackagedProduct> products;
 
     public ProductParty(String description, PackagedProduct... products) {
+        Objects.requireNonNull(description, "Description cannot be null!");
+        Objects.requireNonNull(products, "Products cannot be null!");
         this.description = description;
         this.products = List.of(products);
     }
@@ -42,5 +44,13 @@ public class ProductParty {
     @Override
     public int hashCode() {
         return Objects.hash(description, products);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductParty{" +
+                "description='" + description + '\'' +
+                ", products=" + products +
+                '}';
     }
 }
