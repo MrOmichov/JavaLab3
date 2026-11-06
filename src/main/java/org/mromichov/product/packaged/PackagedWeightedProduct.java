@@ -5,32 +5,17 @@ import org.mromichov.product.WeightedProduct;
 
 import java.util.Objects;
 
-public class PackagedWeightedProduct implements PackagedProduct {
-    private final WeightedProduct weightedProduct;
+public class PackagedWeightedProduct extends WeightedProduct implements PackagedProduct {
     private final ProductPackage productPackage;
     private final int netWeight;
 
-    public PackagedWeightedProduct(WeightedProduct weightedProduct, int netWeight, ProductPackage productPackage) {
-        this.weightedProduct = Objects.requireNonNull(weightedProduct, "Weighted product cannot be null!");
+    public PackagedWeightedProduct(String name, String description, int netWeight, ProductPackage productPackage) {
+        super(name, description);
         this.productPackage = Objects.requireNonNull(productPackage, "Product package cannot be null!");
         if (netWeight < 1) {
             throw new IllegalArgumentException("Net weight must be positive");
         }
         this.netWeight = netWeight;
-    }
-
-    public WeightedProduct getWeightedProduct() {
-        return weightedProduct;
-    }
-
-    @Override
-    public String getName() {
-        return weightedProduct.getName();
-    }
-
-    @Override
-    public String getDescription() {
-        return weightedProduct.getDescription();
     }
 
     public ProductPackage getProductPackage() {
@@ -51,19 +36,20 @@ public class PackagedWeightedProduct implements PackagedProduct {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PackagedWeightedProduct that = (PackagedWeightedProduct) o;
-        return Objects.equals(weightedProduct, that.weightedProduct) &&
-                Objects.equals(productPackage, that.productPackage) && netWeight == that.netWeight;
+        return Objects.equals(productPackage, that.productPackage) && netWeight == that.netWeight
+                && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(weightedProduct, productPackage, netWeight);
+        return Objects.hash(getName(), getDescription(), productPackage, netWeight);
     }
 
     @Override
     public String toString() {
         return "PackagedWeightedProduct{" +
-                "weightedProduct=" + weightedProduct +
+                "name=" + getName() +
+                ", description" + getDescription() +
                 ", productPackage=" + productPackage +
                 ", netWeight=" + netWeight +
                 '}';
