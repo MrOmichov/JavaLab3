@@ -11,20 +11,20 @@ class PackagedPieceProductTest {
 
     @Test
     void nonPositiveNumberOfPiecesCausesException() {
-        assertThrows(IllegalArgumentException.class, () -> new PackagedPieceProduct(product, 0, productPackage));
-        assertThrows(IllegalArgumentException.class, () -> new PackagedPieceProduct(product, -1, productPackage));
+        assertThrows(IllegalArgumentException.class, () -> new PackagedPieceProduct(product.getName(), product.getDescription(), product.getWeight(), 0, productPackage));
+        assertThrows(IllegalArgumentException.class, () -> new PackagedPieceProduct(product.getName(), product.getDescription(), product.getWeight(), -1, productPackage));
     }
 
     @Test
     void calculatesWeightsForMultiplePieces() {
-        var packed = new PackagedPieceProduct(product, 3, productPackage);
+        var packed = new PackagedPieceProduct(product.getName(), product.getDescription(), product.getWeight(), 3, productPackage);
         assertEquals(6, packed.getNetWeight());
         assertEquals(7, packed.getTotalWeight());
     }
 
     @Test
-    void rejectsNullProductAndPackage() {
-        assertThrows(NullPointerException.class, () -> new PackagedPieceProduct(null, 1, productPackage));
-        assertThrows(NullPointerException.class, () -> new PackagedPieceProduct(product, 1, null));
+    void rejectsNullNameAndPackage() {
+        assertThrows(NullPointerException.class, () -> new PackagedPieceProduct(null, null, 1, 1, productPackage));
+        assertThrows(NullPointerException.class, () -> new PackagedPieceProduct(product.getName(), product.getDescription(), product.getWeight(), 1, null));
     }
 }

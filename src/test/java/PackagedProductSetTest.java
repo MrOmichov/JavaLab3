@@ -65,13 +65,15 @@ public class PackagedProductSetTest {
                 "test",
                 productPackage,
                 new PackagedPieceProduct(
-                        pieceProduct,
+                        pieceProduct.getName(),
+                        pieceProduct.getDescription(),
+                        pieceProduct.getWeight(),
                         10,
                         productPackage
-
                 ),
                 new PackagedWeightedProduct(
-                        weightedProduct,
+                        weightedProduct.getName(),
+                        weightedProduct.getDescription(),
                         3,
                         productPackage
                 )

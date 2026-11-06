@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductPartyAndServiceTest {
     private final ProductPackage box = new ProductPackage("box", 1);
-    private final PackagedWeightedProduct rice = new PackagedWeightedProduct(new WeightedProduct("rice", "food"), 5, box);
-    private final PackagedPieceProduct apple = new PackagedPieceProduct(new PieceProduct("apple", "fruit", 2), 3, box);
+    private final PackagedWeightedProduct rice = new PackagedWeightedProduct("semky", "from bazar", 5, box);
+    private final PackagedPieceProduct apple = new PackagedPieceProduct("apple", "fruit", 2, 3, box);
 
     @Test
     void calculatesPartyWeightIncludingNestedPackaging() {
