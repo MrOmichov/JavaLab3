@@ -13,6 +13,10 @@ public class PackagedPieceProduct implements PackagedProduct {
     public PackagedPieceProduct(PieceProduct pieceProduct, int piecesNumber, ProductPackage productPackage) {
         this.pieceProduct = Objects.requireNonNull(pieceProduct, "Piece product cannot be null!");
         this.productPackage = Objects.requireNonNull(productPackage, "Product package cannot be null!");
+
+        if (piecesNumber < 1) {
+            throw new IllegalArgumentException("Number of pieces must be positive");
+        }
         this.piecesNumber = piecesNumber;
     }
 

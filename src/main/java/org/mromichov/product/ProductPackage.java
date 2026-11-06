@@ -9,6 +9,9 @@ public final class ProductPackage {
     public ProductPackage(String name, int weight) {
         Objects.requireNonNull(name, "Name cannot be null!");
         this.name = name;
+        if (weight < 1) {
+            throw new IllegalArgumentException("Net weight must be positive");
+        }
         this.weight = weight;
     }
 

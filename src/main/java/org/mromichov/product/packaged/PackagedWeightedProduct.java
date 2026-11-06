@@ -13,6 +13,9 @@ public class PackagedWeightedProduct implements PackagedProduct {
     public PackagedWeightedProduct(WeightedProduct weightedProduct, int netWeight, ProductPackage productPackage) {
         this.weightedProduct = Objects.requireNonNull(weightedProduct, "Weighted product cannot be null!");
         this.productPackage = Objects.requireNonNull(productPackage, "Product package cannot be null!");
+        if (netWeight < 1) {
+            throw new IllegalArgumentException("Net weight must be positive");
+        }
         this.netWeight = netWeight;
     }
 

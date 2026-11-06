@@ -6,6 +6,9 @@ public class PieceProduct extends Product {
     private final int weight;
     public PieceProduct(String name, String description, int weight) {
         super(name, description);
+        if (weight < 1) {
+            throw new IllegalArgumentException("Net weight must be positive");
+        }
         this.weight = weight;
     }
 
